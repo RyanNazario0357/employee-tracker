@@ -82,10 +82,18 @@ const addEmployee = () => {
     addBlankLine();
     connection.query(`SELECT * FROM roles;`, (err,res) => {
         if (err) throw err;
-        inquirer.createPromptModule([
+        inquirer.prompt([
             {
-                
-            }
+                name:`first_name`,
+                type: `input`,
+                message: `Employee First Name:`
+            },
+            {
+                namke:`Last_name`,
+                type:`input`,
+                message:`Employee Last Name:`
+            },
+            
         ])
     })
 }
