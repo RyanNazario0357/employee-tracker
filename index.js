@@ -187,5 +187,23 @@ const updateEmployee = () => {
             console.table(res)
         }
     )
-    
+    connection.query(`SELECT * FROM roles;`, (err, res) => {
+        iff (err) throw err;
+        inquirer.prompt([
+            {
+                name: `employeeID`,
+                type: `input`,
+                message: `Input ID number of desired Employee:`,
+                validate: (answer) => {
+                    if (isNaN(answer)) {
+                        return "Enter Employees ID Number";
+                    }
+                    return true;
+                },
+            },
+            {
+                
+            }        
+        ])
+    })
 }
