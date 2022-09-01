@@ -93,7 +93,30 @@ const addEmployee = () => {
                 type:`input`,
                 message:`Employee Last Name:`
             },
-            
+            {
+                name:`role`,
+                type:`input`,
+                message() {
+                    const addEmployeeArray = [];
+                    res.forEach(({title, id}) => {
+                        addEmployeeArray.push(id + '=' + title);
+                    });
+                    console.log(`Input Employees ID:`)
+                    return addEmployeeArray.join(`\n`)
+                },
+                validate: (answer) => {
+                    if (isNaN(answer)) {
+                        return "Employees Role ID Number:";
+                    }
+                    return true;
+                },
+            },
+            {
+                name: `manager_id`,
+                type: `input`,
+                message: `Manager ID:`
+            }
         ])
+        
     })
 }
