@@ -202,8 +202,24 @@ const updateEmployee = () => {
                 },
             },
             {
-                
+                name:`roleID`,
+                type:`input`,
+                message() {
+                    const roleArray = [];
+                    res.forEach(({ title, id}) => {
+                        roleArray.push(id + `=` + title);
+                    });
+                    console.log(`New roles ID Number:\n`)
+                    return roleArray.join(`\n`)
+                },
+                validate: (answer) => {
+                    if (isNaN(answer)) {
+                        return "Enter new roles ID";
+                    }
+                    return true;
+                },
             }        
         ])
+        
     })
 }
