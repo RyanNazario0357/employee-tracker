@@ -77,3 +77,15 @@ const startQuestion = () => {
     }
 })
 }
+
+const addEmployee = () => {
+    addBlankLine();
+    connection.query(`SELECT * FROM roles;`, (err,res) => {
+        if (err) throw err;
+        inquirer.createPromptModule([
+            {
+                
+            }
+        ])
+    })
+}
