@@ -15,16 +15,50 @@ const startQuestion = () => {
         message: 'What is going to be done?',
         choices: [
             'Add Employee',
-            'Remove Employee',
+            'Delete Employee',
             'Update Employee',
             'View Employees',
             'Add Role',
-            'Remove Role',
+            'Delete Role',
             'View Roles',
             'Add Department',
-            'Remove Department',
+            'Delete Department',
             'View Departments',
             'End'
         ]
     })
+
+    .then((answer) => {
+        case 'Add Employee':
+            addEmployee()
+            break;
+
+        case 'Delete Employee':
+            removeEmployee()
+            break;
+
+        case 'Update Employee':
+            updateEmployee()
+            break;
+
+        case 'View Employees':
+            viewEmployees()
+            break;
+        
+        case 'Add Role':
+            addRole()
+            break;
+
+        case 'Delete Role':
+            deleteRole()
+            break;
+
+        case 'View Roles':
+            viewRoles()
+            break;
+
+        case 'Add Department':
+            addDepartment
+
+    }
 }
