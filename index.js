@@ -117,6 +117,23 @@ const addEmployee = () => {
                 message: `Manager ID:`
             }
         ])
-        
+        .then((answer) => {
+            connection.query(
+                `insert into employees set`,
+                [
+                    {
+                        first_name: answer.first_name,
+                        Last_name: answer.last_name,
+                        role_id: answer.role,
+                        manager_id: answer.manager_id
+                    },
+                ],
+                (err, res) => {
+                    if (err) throw err;
+                    console.log(`${res.affectedRows} employee added. \n`)
+                    viewEmployees();
+                }
+            )
+        })
     })
 }
