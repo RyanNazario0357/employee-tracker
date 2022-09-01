@@ -177,3 +177,15 @@ const deleteEmployee = () => {
         })
     })
 }
+
+const updateEmployee = () => {
+    addBlankLine();
+    connection.query(
+        `SELECT employees.id "ID", employees.first_name "First Name", employees.last_name "Last Name" FROKM employees;`,
+        (err, res) => {
+            if (err) throw err;
+            console.table(res)
+        }
+    )
+    
+}
