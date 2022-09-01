@@ -2,6 +2,7 @@ const connection = require('./db/connection');
 const inquirer = require('inquirer');
 const figlet = require('figlet');
 const consoleTable = require('console.table');
+const { Endpoint } = require('googleapis-common');
 
 const addBlankLine = () => {
     console.log(` \n`)
@@ -29,6 +30,7 @@ const startQuestion = () => {
     })
 
     .then((answer) => {
+        switch (answer.action) {
         case 'Add Employee':
             addEmployee()
             break;
@@ -58,7 +60,20 @@ const startQuestion = () => {
             break;
 
         case 'Add Department':
-            addDepartment
+            addDepartment()
+            break;
 
+        case 'Delete Department':
+            deleteDepartment()
+            break;
+
+        case 'View Departments':
+            viewDepartments()
+            break;
+
+        case 'End':
+            End()
+            break;
     }
+})
 }
