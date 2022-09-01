@@ -137,3 +137,43 @@ const addEmployee = () => {
         })
     })
 }
+
+const deleteEmployee = () => {
+    addBlankLine();
+    connection.query(`SELECT * FROM roles;`, (err,res) => {
+        if (err) throw err;
+        inquirer.prompt([
+            {
+                name: `employees`,
+                type:`input`,
+                message() {
+                    const employeesArray = [];
+                    res.forEach(({id, first_name, last_name}) => {
+                        employeesArray.push(`${id} ${first_name} ${last_name}`);
+                    });
+                    console.log(`Employees ID whom is to be removed:`)
+                    return employeesArray.join(`\n`)
+                },
+                validate: (answer) => {
+                    if (isNaN(answer)) {
+                        return "Employees ID Number:";
+                    }
+                    return true;
+                },
+            },
+        ])
+        .then((answer) => {
+            connection.query(
+                `delete from employees where ? `,
+                    {
+                       id: (answer.employee)
+                    },
+                (err, res) => {
+                    if (err) throw err;
+                    console.log(`${res.affectedRows} Deleted\n`)
+                    viewEmployees();
+                }
+            )
+        })
+    })
+}
