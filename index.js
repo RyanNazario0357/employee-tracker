@@ -354,3 +354,28 @@ const deleteRole = () => {
         })
     })
 }
+
+const addDepartment = () => {
+    inquirer.prompt([
+        {
+            name: `name`,
+            type: `input`,
+            message: `Add Department:`
+        }
+    ])
+    .then((answer) => {
+        connection.query(
+            `INSERT INTO departments SET ?`,
+            [
+                {
+                    department_name: answer.name,
+                },
+            ],
+            (err,res => {
+                if (err) throw err;
+                console.log(`${res.affectedRows} new department added. \n`)
+                viewAllDepartments();
+            }
+        )
+    })
+};
