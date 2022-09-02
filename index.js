@@ -269,3 +269,55 @@ const viewAllRoles = () => {
     )
 }
 
+const addRole = () => {
+    connection.query(`SELECT * FROM departments;`, (err,res) => {
+        if (err) throw err;
+        inquirer.prompt([
+            {
+                name:`title`,
+                type: `input`,
+                message: `New Roles:`
+            },
+            {
+                namke:`salaryu`,
+                type:`input`,
+                message:`Add Salary:`
+            },
+            {
+                name:`departments`,
+                type:`input`,
+                message() {
+                    const departmentArray = [];
+                    res.forEach(({department_name, id}) => {
+                        departmentArray.push(id + '=' + department_name);
+                    });
+                    console.log(`Input Department ID:`)
+                    return departmentArray.join(`\n`)
+                },
+                validate: (answer) => {
+                    if (isNaN(answer)) {
+                        return "Department ID Number:";
+                    }
+                    return true;
+                },
+            }
+        ])
+        .then((answer) => {
+            connection.query(
+                `INSERT INTO roles SET`,
+                [
+                    {
+                        titile: answer.title,
+                        salary: answer.salary,
+                        department_id: answer.departments
+                    },
+                ],
+                (err, res) => {
+                    if (err) throw err;
+                    console.log(`${res.affectedRows} role added. \n`)
+                    viewAllRoles();
+                }
+            )
+        })
+    })
+}
