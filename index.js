@@ -188,7 +188,7 @@ const updateEmployee = () => {
         }
     )
     connection.query(`SELECT * FROM roles;`, (err, res) => {
-        iff (err) throw err;
+        if (err) throw err;
         inquirer.prompt([
             {
                 name: `employeeID`,
@@ -220,6 +220,24 @@ const updateEmployee = () => {
                 },
             }        
         ])
-        
+        .then((answer) => {
+            console.log(`Role: ${answer.roleID}`)
+            console.log(`Employee id: ${answer.employeeID}`)
+            connection.query(`UPDATE employee SET ? WHERE ?;`,
+            [
+                {
+                    role_id: (answer.roleID),
+                },
+                {
+                    id: (answer.employeeID)
+                },
+            ],
+            (err, res) => {
+                if (err) throw err
+                console.log(`${res.affectedRows} employee update\n`)
+                viewEmployees();
+            }
+            )
+        })
     })
-}
+};
