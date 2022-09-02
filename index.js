@@ -256,3 +256,16 @@ const viewEmployees = () => {
     )
     setTimeout(startQuestion,30);
 }
+
+const viewAllRoles = () => {
+    addBlankLine();
+    connection.query(
+        `SELECT roles.id "ID", roles.title "Title" FROM roles;`,
+        (err,res) => {
+            if (err) throw err;
+            console.table(res)
+            startQuestion();
+        }
+    )
+}
+
