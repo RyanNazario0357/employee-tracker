@@ -241,3 +241,18 @@ const updateEmployee = () => {
         })
     })
 };
+
+const viewEmployees = () => {
+    addBlankLine();
+    connection.query(
+        `SELECT employees.id AS id, employees.first_name AS First_Name, employee.last_name AS Last_Name,
+        roles.title AS Title, departments.department_name AS Departments, roles.salary AS Salary, CONCAT(manager.first_name, ' ', manager.last_name) AS Manager
+        FROM employees LEFT JOIN roles on employees.role_id = roles.id LEFT JOIN departments on roles.department_id = departments.id LEFT JOIN employees manager on manager.id = 
+        employees.manager_id ORDER BY department_name ASC;`,
+        (err, res) => {
+            if (err) throw err;
+            console.table(res)
+        }
+    )
+    setTimeout(startQuestion,30);
+}
