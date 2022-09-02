@@ -279,7 +279,7 @@ const addRole = () => {
                 message: `New Roles:`
             },
             {
-                namke:`salaryu`,
+                namke:`salary`,
                 type:`input`,
                 message:`Add Salary:`
             },
@@ -315,6 +315,39 @@ const addRole = () => {
                 (err, res) => {
                     if (err) throw err;
                     console.log(`${res.affectedRows} role added. \n`)
+                    viewAllRoles();
+                }
+            )
+        })
+    })
+};
+
+const deleteRole = () => {
+    connection.query(`SELECT * FROM roles;`, (err,res) => {
+        if (err) throw err;
+        inquirer.prompt([
+            {
+                name: `roles`,
+                type:`rawlist`,
+                message: `What role do you want to delete? \n`,
+                choices() {
+                    const roleArray = [];
+                    res.forEach(({ title}) => {
+                        roleArray.push(title);
+                    });
+                    return roleArray;
+                },
+            },
+        ])
+        .then((answer) => {
+            connection.query(
+                `delete from roles where ? `,
+                    {
+                       id: (answer.roles)
+                    },
+                (err, res) => {
+                    if (err) throw err;
+                    console.log(`${res.affectedRows} Deleted\n`)
                     viewAllRoles();
                 }
             )
