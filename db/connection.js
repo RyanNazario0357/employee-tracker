@@ -9,3 +9,13 @@ const db = mysql.createConnection({
     multipleStatements: true
 });
 
+db.connect(function(err, response) {
+    if (err) {
+        console.log("Connection didint work")
+        return err
+    } else {
+        return response
+    }
+});
+
+module.exports = db;
