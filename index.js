@@ -377,5 +377,5 @@ const addDepartment = () => {
                 viewAllDepartments();
             }
         )
-    })
-};
+    )}
+)};
