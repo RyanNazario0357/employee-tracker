@@ -49,3 +49,22 @@ LEFT JOIN roles on employees.role_id = roles.id
 LEFT JOIN departments on roles.department_id = departments.id 
 LEFT JOIN employees manager on manager.id = employees.manager_id
 ORDER BY department_name ASC;
+
+SELECT
+roles.title
+AS Title
+FROM employeetracker_db.roles
+ORDER BY roles.title ASC;
+
+SELECT
+roles.id
+AS Id,
+roles.title
+AS Title,
+departments.department_name
+AS Departments,
+roles.salary
+AS Salary
+FROM employeetracker_db.roles
+LEFT JOIN departments on roles.department_id = departments.id
+ORDER BY department_name ASC;
