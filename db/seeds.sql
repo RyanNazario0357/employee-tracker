@@ -68,3 +68,20 @@ AS Salary
 FROM employeetracker_db.roles
 LEFT JOIN departments on roles.department_id = departments.id
 ORDER BY department_name ASC;
+
+SELECT departments.department_name 
+AS Departments
+FROM departments
+ORDER BY department_name ASC;
+
+USE employeetracker_db;
+
+SELECT employees.id, 
+CONCAT(employees.first_name," ", employees.last_name)
+AS FullName, 
+departments.department_name 
+AS Departments
+FROM employees 
+LEFT JOIN roles on employees.role_id = roles.id
+LEFT JOIN departments on roles.department_id = departments.id
+ORDER BY department_name ASC;
